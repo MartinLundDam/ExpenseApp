@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/button_home"
+        android:icon="@drawable/home_bt"
+        android:title="Home" />
+    <item
+        android:id="@+id/button_transactions"
+        android:icon="@drawable/transactions_bt"
+        android:title="Transactions" />
+    <item
+        android:id="@+id/button_add"
+        android:icon="@drawable/add_bt"
+        android:title="Add" />
+    <item
+        android:id="@+id/button_budget"
+        android:icon="@drawable/budget_bt"
+        android:title="Budget" />
+    <item
+        android:id="@+id/button_profile"
+        android:icon="@drawable/profile_bt"
+        android:title="Profile" />
+
+</menu>
