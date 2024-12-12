@@ -1,6 +1,7 @@
 package com.example.expenseapp;
 
 import android.annotation.SuppressLint;
+import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -31,42 +32,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        DBHandler dbHandler = new DBHandler(this);
+        dbHandler.onOpen(dbHandler.getWritableDatabase()); //open database
+        dbHandler.onUpgrade(dbHandler.getWritableDatabase()); //clear and start database again
+        //Add users
+        dbHandler.addUser("Martin", "martin@dk", "123");
+        dbHandler.addUser("Theresa", "theresa@mail.dk","321");
+
         replaceFragment(new HomeFragment()); //make log-in page the standard
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-/*
-            switch (item.getItemId()) {
-                case R.id.button_home:
-                    break;
-                case R.id.button_add:
-                    break;
-            }
- */
             int id = item.getItemId();
             if (id == R.id.button_home) {
                 replaceFragment(new HomeFragment());
-            }
-            else if (id == R.id.button_add) {
+            } else if (id == R.id.button_add) {
                 replaceFragment(new AddFragment());
-            }
-            else if (id == R.id.button_transactions) {
+            } else if (id == R.id.button_transactions) {
                 replaceFragment(new TransactionsFragment());
-            }
-            else if (id == R.id.button_budget) {
+            } else if (id == R.id.button_budget) {
                 replaceFragment(new BudgetFragment());
-            }
-            else if (id == R.id.button_profile) {
+            } else if (id == R.id.button_profile) {
                 replaceFragment(new ProfileFragment());
             }
-
             return true;
         });
 
     }
-    private void replaceFragment(Fragment fragment){
+
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame_layout,fragment);
+        ft.replace(R.id.frame_layout, fragment);
         ft.commit();
     }
 
