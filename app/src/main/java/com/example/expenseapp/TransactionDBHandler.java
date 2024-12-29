@@ -1,19 +1,27 @@
 package com.example.expenseapp;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 
 import androidx.annotation.Nullable;
 
 import com.example.expenseapp.expenses.ExpenseType;
+import com.example.expenseapp.incomes.IncomeTransaction;
 import com.example.expenseapp.incomes.IncomeType;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionDBHandler extends SQLiteOpenHelper {
     //db name and version
     private static final String DB_NAME = "transaction_db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     //tables
     private static final String TABLE_EXPENSES = "expenses";
@@ -79,6 +87,11 @@ public class TransactionDBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void onUpgrade(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INCOMES);
+        onCreate(db);
+    }
+
     public void addIncome(String description, double amount, String date, int typeId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -122,6 +135,40 @@ public class TransactionDBHandler extends SQLiteOpenHelper {
             values.put(KEY_TYPE, type.name());
             db.insert(TABLE_INCOME_TYPES, null, values);
         }
+    }
+
+    public List<IncomeTransaction> getAllIncomes() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<IncomeTransaction> incomeList = new ArrayList<>();
+
+        // Corrected query: selecting columns from both tables
+        String query = "SELECT i." + KEY_ID + ", i." + KEY_DESCRIPTION + ", i." + KEY_AMOUNT + ", i." + KEY_DATE + ", it." + KEY_TYPE +
+                " FROM " + TABLE_INCOMES + " i " +
+                "INNER JOIN " + TABLE_INCOME_TYPES + " it " +
+                "ON i." + KEY_TYPE_ID + " = it." + KEY_ID;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Retrieve data from cursor
+                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+                @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION));
+                @SuppressLint("Range") double amount = cursor.getDouble(cursor.getColumnIndex(KEY_AMOUNT));
+                @SuppressLint("Range") String date = cursor.getString(cursor.getColumnIndex(KEY_DATE));
+                @SuppressLint("Range") String type = cursor.getString(cursor.getColumnIndex(KEY_TYPE)); // Correct income type retrieval
+
+                // Create IncomeTransaction object and add to list
+                IncomeTransaction incomeTransaction = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    incomeTransaction = new IncomeTransaction(description, amount, LocalDate.parse(date), IncomeType.valueOf(type));
+                }
+                incomeList.add(incomeTransaction);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return incomeList;
     }
 
 }

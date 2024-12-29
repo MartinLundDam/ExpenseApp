@@ -40,6 +40,6 @@ public abstract class TransactionItem {
     public void setDate(LocalDate date) {
         this.date = date;
     }
-    public abstract Enum<?> getExpenseType();
+    public abstract Enum<?> getIncomeType();
 
 }

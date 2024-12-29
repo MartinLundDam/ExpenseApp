@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 public class DBHandler extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "login_db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String TABLE_NAME = "users";
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
@@ -56,6 +56,5 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME, null, values);
     }
-
 
 }

@@ -141,9 +141,6 @@ public class AddIncome extends Fragment {
             return;
 
 
-
-
-
         });
         return view;
     }

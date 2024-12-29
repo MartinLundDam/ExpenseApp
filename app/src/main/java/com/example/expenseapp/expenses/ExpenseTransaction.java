@@ -13,7 +13,7 @@ public class ExpenseTransaction extends TransactionItem {
     }
 
     @Override
-    public ExpenseType getExpenseType() {
+    public ExpenseType getIncomeType() {
         return expenseType;
     }
 }

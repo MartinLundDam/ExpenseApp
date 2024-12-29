@@ -13,7 +13,9 @@ public class IncomeTransaction extends TransactionItem {
     }
 
     @Override
-    public IncomeType getExpenseType() {
+    public IncomeType getIncomeType() {
         return incomeType;
     }
+
+
 }

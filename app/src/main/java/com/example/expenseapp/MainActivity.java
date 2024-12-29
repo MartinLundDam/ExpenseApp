@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import com.example.expenseapp.expenses.ExpenseType;
 import com.example.expenseapp.fragments.AddFragment;
 import com.example.expenseapp.fragments.BudgetFragment;
 import com.example.expenseapp.fragments.HomeFragment;
+import com.example.expenseapp.fragments.LoginFragment;
 import com.example.expenseapp.fragments.ProfileFragment;
 import com.example.expenseapp.fragments.TransactionsFragment;
 
@@ -35,20 +37,20 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Initialize DBHandler
         DBHandler dbHandler = new DBHandler(this);
-        SQLiteDatabase sqLiteDatabase = dbHandler.getWritableDatabase();
-        //dbHandler.onOpen(dbHandler.getWritableDatabase()); //open database
-        //dbHandler.onUpgrade(dbHandler.getWritableDatabase()); //clear and start database again
-        //Add users
+        SQLiteDatabase sqLiteDatabase = dbHandler.getWritableDatabase();  // Triggers onUpgrade if version changes
+
+        // Add users or other operations after the database is upgraded
+        dbHandler.addUser("User1", "email1@example.com", "123");
+        dbHandler.addUser("User2", "email2@example.com", "321");
+
+        // Initialize TransactionDBHandler and add income
         TransactionDBHandler tdb = new TransactionDBHandler(this);
         SQLiteDatabase db = tdb.getWritableDatabase();
-        tdb.addIncome("løn",12,"12",1);
-        //tdb.onCreate(tdb.getWritableDatabase());
+        tdb.addIncome("løn", 12, "12", 1);
 
-        dbHandler.addUser("Martin", "martin@dk", "123");
-        dbHandler.addUser("Theresa", "theresa@mail.dk","321");
-
-        replaceFragment(new HomeFragment()); //make log-in page the standard
+        replaceFragment(new LoginFragment()); //make log-in page the first fragment to show
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -69,11 +71,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
+
+        if (fragment instanceof LoginFragment) {
+            binding.bottomNavigationView.setVisibility(View.GONE); // Hide navbar
+        } else {
+            binding.bottomNavigationView.setVisibility(View.VISIBLE); // Show navbar
+        }
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frame_layout, fragment);
         ft.commit();
     }
+
 
 }
