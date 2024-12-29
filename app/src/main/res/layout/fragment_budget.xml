@@ -5,9 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.BudgetFragment"
     android:background="#00BCD4"
-    tools:ignore="ExtraText"><![CDATA[>
-
-    ]]>
+    tools:ignore="ExtraText">
 
     <TextView
         android:id="@+id/introTV"

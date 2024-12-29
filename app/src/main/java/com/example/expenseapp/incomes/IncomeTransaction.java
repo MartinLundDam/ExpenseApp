@@ -7,8 +7,8 @@ import java.time.LocalDate;
 public class IncomeTransaction extends TransactionItem {
     private IncomeType incomeType;
 
-    public IncomeTransaction(double amount, LocalDate date,IncomeType incomeType) {
-        super(amount, date);
+    public IncomeTransaction(String description, double amount, LocalDate date,IncomeType incomeType) {
+        super(description, amount, date);
         this.incomeType = incomeType;
     }
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AddIncome"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp">
+
+
+    <TextView
+        android:id="@+id/intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add an income"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="24dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intro"
+        android:text="Description:"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/descriptionInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionLabel"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="Enter short description" />
+
+    <!-- Amount Input -->
+    <TextView
+        android:id="@+id/amountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descriptionInput"
+        android:text="Amount:"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/amountInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/amountLabel"
+        android:inputType="numberDecimal"
+        android:hint="Enter amount" />
+
+    <!-- Date Picker -->
+    <TextView
+        android:id="@+id/dateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:"
+        android:layout_below="@id/amountInput"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/datePickerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateLabel"
+        android:text="Select Date" />
+
+    <!-- Income Type Dropdown -->
+    <TextView
+        android:id="@+id/incomeTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Income Type:"
+        android:layout_below="@id/datePickerButton"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/incomeTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/incomeTypeLabel"
+        android:spinnerMode="dropdown" />
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/incomeTypeSpinner"
+        android:layout_marginTop="16dp"
+        android:text="Submit" />
+
+</RelativeLayout>

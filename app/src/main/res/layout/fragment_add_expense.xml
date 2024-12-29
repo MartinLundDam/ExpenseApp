@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AddExpense">
+
+    <TextView
+        android:id="@+id/header_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add an expense"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="24dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true" />
+
+    <!-- Amount Input -->
+    <TextView
+        android:id="@+id/amountLabel_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_expense"
+        android:text="Amount:"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/amountInput_expense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/amountLabel_expense"
+        android:inputType="numberDecimal"
+        android:hint="Enter amount" />
+
+    <!-- Date Picker -->
+    <TextView
+        android:id="@+id/dateLabel_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:"
+        android:layout_below="@id/amountInput_expense"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/datePickerButton_expense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateLabel_expense"
+        android:text="Select Date" />
+
+    <!-- Income Type Dropdown -->
+    <TextView
+        android:id="@+id/incomeTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Income Type:"
+        android:layout_below="@id/datePickerButton_expense"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/incomeTypeSpinner_expense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/incomeTypeLabel"
+        android:spinnerMode="dropdown" />
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/incomeTypeSpinner_expense"
+        android:layout_marginTop="16dp"
+        android:text="Submit" />
+
+</RelativeLayout>

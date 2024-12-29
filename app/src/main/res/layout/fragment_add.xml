@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.AddFragment"
-    android:background="#673AB7">>
+    android:background="#C9C3DB">>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+
+    <RadioGroup
+        android:id="@+id/addRG"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:layout_gravity="center"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="500dp">
 
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/addTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Please add an income or an expense"/>
+
+
+        <RadioButton
+            android:id="@+id/addIncomeRB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Income" />
+
+        <RadioButton
+            android:id="@+id/addExpenseRB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Expense" />
+
+        <Button
+            android:id="@+id/continueButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue" />
+    </RadioGroup>
+
+</RelativeLayout>

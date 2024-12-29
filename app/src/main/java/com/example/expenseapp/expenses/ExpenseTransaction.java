@@ -7,8 +7,8 @@ import java.time.LocalDate;
 public class ExpenseTransaction extends TransactionItem {
     private ExpenseType expenseType;
 
-    public ExpenseTransaction(double amount, LocalDate date, ExpenseType expenseType) {
-        super(amount, date);
+    public ExpenseTransaction(String description, double amount, LocalDate date, ExpenseType expenseType) {
+        super(description, amount, date);
         this.expenseType = expenseType;
     }
 

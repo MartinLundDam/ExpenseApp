@@ -2,6 +2,7 @@ package com.example.expenseapp;
 
 import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteCantOpenDatabaseException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +18,7 @@ import com.example.expenseapp.R;
 
 
 import com.example.expenseapp.databinding.ActivityMainBinding;
+import com.example.expenseapp.expenses.ExpenseType;
 import com.example.expenseapp.fragments.AddFragment;
 import com.example.expenseapp.fragments.BudgetFragment;
 import com.example.expenseapp.fragments.HomeFragment;
@@ -34,9 +36,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         DBHandler dbHandler = new DBHandler(this);
-        dbHandler.onOpen(dbHandler.getWritableDatabase()); //open database
-        dbHandler.onUpgrade(dbHandler.getWritableDatabase()); //clear and start database again
+        SQLiteDatabase sqLiteDatabase = dbHandler.getWritableDatabase();
+        //dbHandler.onOpen(dbHandler.getWritableDatabase()); //open database
+        //dbHandler.onUpgrade(dbHandler.getWritableDatabase()); //clear and start database again
         //Add users
+        TransactionDBHandler tdb = new TransactionDBHandler(this);
+        SQLiteDatabase db = tdb.getWritableDatabase();
+        tdb.addIncome("løn",12,"12",1);
+        //tdb.onCreate(tdb.getWritableDatabase());
+
         dbHandler.addUser("Martin", "martin@dk", "123");
         dbHandler.addUser("Theresa", "theresa@mail.dk","321");
 
@@ -59,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();

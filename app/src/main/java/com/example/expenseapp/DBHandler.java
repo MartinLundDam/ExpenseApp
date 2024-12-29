@@ -46,7 +46,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addUser(String name,String email, String password){
+    public void addUser(String name, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -56,5 +56,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME, null, values);
     }
+
 
 }
